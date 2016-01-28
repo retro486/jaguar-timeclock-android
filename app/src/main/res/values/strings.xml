@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">JaguarTimeclock</string>
+    <string name="action_settings">Settings</string>
+    <string name="clocked_in">CLOCKED IN</string>
+    <string name="clock_out">Clock out</string>
+    <string name="server_error">There was a problem clocking in/out.</string>
+    <string name="invalid_json_error">There was a problem reading the server response.</string>
+    <string name="invalid_date_error">There was a problem reading the last clock in/out time.</string>
+    <string name="success">You have been clocked in/out.</string>
+    <string name="fetch_error">There was a problem connecting to the timeclock server.</string>
+</resources>
