@@ -1,10 +1,14 @@
 package com.jaguardesignstudio.jaguartimeclock;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -20,9 +24,20 @@ import java.text.ParseException;
 
 // Feature idea: keep track of clock ins/outs locally and sync with server separately once internet is restored.
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActionBarActivity {
     private final String LOG_TAG = this.getClass().getSimpleName();
     private ClockStamp mClockStamp; // TODO store this locally for caching
+
+    public boolean isOnline(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        return isConnected;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
             return true;
         }
 
